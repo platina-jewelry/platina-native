@@ -452,10 +452,12 @@
 
 1. **Начало работы над фичей**
 
-Каждый разработчик создает свою отдельную ветку от develop для работы над новой фичей:
+Каждый разработчик создает свою отдельную ветку от `develop` для работы над новой фичей:
 
 ```bash
-git checkout develop 
+# Сначала мы переключаемся на ветку develop:
+git checkout develop
+# Затем, от ветки develop, мы создаем и переключаемся на новую ветку для работы над фичей
 git checkout -b feature/awesome-feature
 ```
 
@@ -463,56 +465,73 @@ git checkout -b feature/awesome-feature
 
 2. **Завершение фичи и интеграция в develop**
 
-Когда фича готова, разработчик создает pull request (PR) в ветку develop. После кода-ревью и тестирования фича сливается
-в develop:
+Когда фича готова, разработчик создает pull request (PR) в ветку `develop`. После кода-ревью и тестирования фича
+сливается в `develop`:
 
 ```bash
-git checkout develop 
-git pull origin develop 
+# Переключаемся на ветку develop:
+git checkout develop
+# Получаем последние изменения с удаленного репозитория:
+git pull origin develop
+# Сливаем ветку feature с develop:
 git merge feature/awesome-feature
 ```
 
 3. **Подготовка релиза**
 
-После того как в develop собрано достаточно фич, начинается подготовка релиза. Создается ветка release:
+После того как в `develop` собрано достаточно фич, начинается подготовка релиза. Создается ветка `release`:
 
 ```bash
-git checkout develop 
+# Переключаемся на ветку develop:
+git checkout develop
+# Создаем и переключаемся на новую ветку release:
 git checkout -b release/1.0.0
 ```
 
 В этой ветке выполняются последние правки (например, обновление версии, исправление багов). После завершения всех
-подготовительных работ ветка сливается в master (для деплоя в продакшн) и обратно в develop:
+подготовительных работ ветка сливается в `master` (для деплоя в продакшн) и обратно в `develop`:
 
 ```bash
-git checkout master 
-git merge release/1.0.0 
+# Переключаемся на ветку master:
+git checkout master
+# Сливаем изменения из release в master:
+git merge release/1.0.0
+# Создаем тег для релиза:
 git tag -a 1.0.0 -m "Release version 1.0.0"
-git checkout develop 
+# Переключаемся на ветку develop:
+git checkout develop
+# Сливаем изменения из release обратно в develop:
 git merge release/1.0.0
 ```
 
 4. **Горячие исправления (Hotfix)**
 
-Если после релиза в продакшн возникли критические баги, создается ветка hotfix от master:
+Если после релиза в продакшн возникли критические баги, создается ветка `hotfix` от `master`:
 
 ```bash
-git checkout master 
+# Переключаемся на ветку master:
+git checkout master
+# Создаем ветку hotfix для срочного исправления:
 git checkout -b hotfix/urgent-bugfix
 ```
 
-После исправления багов ветка сливается в master и develop:
+После исправления багов ветка сливается в `master` и `develop`:
 
 ```bash
-git checkout master 
-git merge hotfix/urgent-bugfix 
-git checkout develop 
+# Переключаемся на ветку master:
+git checkout master
+# Сливаем исправления из ветки hotfix:
+git merge hotfix/urgent-bugfix
+# Переключаемся на ветку develop:
+git checkout develop
+# Сливаем исправления из ветки hotfix в develop:
 git merge hotfix/urgent-bugfix
 ```
 
 Затем, версия обновляется с новым тегом и выпускается в продакшн:
 
 ```bash
+# Создаем новый тег для горячего исправления:
 git tag -a 1.0.1 -m "Hotfix for urgent bug"
 ```
 
@@ -521,8 +540,11 @@ git tag -a 1.0.1 -m "Hotfix for urgent bug"
 Когда все задачи завершены, ветки для фич и релиза удаляются:
 
 ```bash
-git branch -d feature/awesome-feature 
-git branch -d release/1.0.0 
+# Удаляем локальную ветку feature:
+git branch -d feature/awesome-feature
+# Удаляем локальную ветку release:
+git branch -d release/1.0.0
+# Удаляем локальную ветку hotfix:
 git branch -d hotfix/urgent-bugfix
 ```
 
@@ -531,3 +553,4 @@ git branch -d hotfix/urgent-bugfix
 Git Flow помогает организовать работу команды, избежать путаницы в управлении версиями и создать четкий процесс для
 разработки, тестирования и выпуска новых версий. Для команды из 5 человек с разными задачами это подходящая стратегия,
 которая позволит легко масштабировать процесс разработки и поддерживать высокое качество кода.
+
