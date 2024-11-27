@@ -455,7 +455,8 @@
 Каждый разработчик создает свою отдельную ветку от develop для работы над новой фичей:
 
 ```bash
-git checkout develop git checkout -b feature/awesome-feature
+git checkout develop 
+git checkout -b feature/awesome-feature
 ```
 
 Он работает над фичей и регулярно пушит изменения в свою ветку (100% в конце рабочего дня).
@@ -466,7 +467,9 @@ git checkout develop git checkout -b feature/awesome-feature
 в develop:
 
 ```bash
-git checkout develop git pull origin develop git merge feature/awesome-feature
+git checkout develop 
+git pull origin develop 
+git merge feature/awesome-feature
 ```
 
 3. **Подготовка релиза**
@@ -474,15 +477,19 @@ git checkout develop git pull origin develop git merge feature/awesome-feature
 После того как в develop собрано достаточно фич, начинается подготовка релиза. Создается ветка release:
 
 ```bash
-git checkout develop git checkout -b release/1.0.0
+git checkout develop 
+git checkout -b release/1.0.0
 ```
 
 В этой ветке выполняются последние правки (например, обновление версии, исправление багов). После завершения всех
 подготовительных работ ветка сливается в master (для деплоя в продакшн) и обратно в develop:
 
 ```bash
-git checkout master git merge release/1.0.0 git tag -a 1.0.0 -m "Release version 1.0.0"
-git checkout develop git merge release/1.0.0
+git checkout master 
+git merge release/1.0.0 
+git tag -a 1.0.0 -m "Release version 1.0.0"
+git checkout develop 
+git merge release/1.0.0
 ```
 
 4. **Горячие исправления (Hotfix)**
@@ -490,13 +497,17 @@ git checkout develop git merge release/1.0.0
 Если после релиза в продакшн возникли критические баги, создается ветка hotfix от master:
 
 ```bash
-git checkout master git checkout -b hotfix/urgent-bugfix
+git checkout master 
+git checkout -b hotfix/urgent-bugfix
 ```
 
 После исправления багов ветка сливается в master и develop:
 
 ```bash
-git checkout master git merge hotfix/urgent-bugfix git checkout develop git merge hotfix/urgent-bugfix
+git checkout master 
+git merge hotfix/urgent-bugfix 
+git checkout develop 
+git merge hotfix/urgent-bugfix
 ```
 
 Затем, версия обновляется с новым тегом и выпускается в продакшн:
@@ -510,7 +521,9 @@ git tag -a 1.0.1 -m "Hotfix for urgent bug"
 Когда все задачи завершены, ветки для фич и релиза удаляются:
 
 ```bash
-git branch -d feature/awesome-feature git branch -d release/1.0.0 git branch -d hotfix/urgent-bugfix
+git branch -d feature/awesome-feature 
+git branch -d release/1.0.0 
+git branch -d hotfix/urgent-bugfix
 ```
 
 ### Заключение
